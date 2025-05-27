@@ -1,0 +1,79 @@
+[tool.poetry]
+name = "console"
+version = "0.1.0"
+description = "service for scheduling and sending push notifications for social pocker project."
+authors = []
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.5"
+psycopg2 = "^2.9.10"
+django-cleanup = "^9.0.0"
+gunicorn = "^23.0.0"
+djangorestframework = "^3.15.2"
+django-extensions = "^3.2.3"
+django-environ = "^0.12.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.1.0"
+autoflake = "^2.3.1"
+isort = "^6.0.0"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+flake8-pyproject = "^1.2.3"
+flake8-pytest-style = "^2.1.0"
+pytest = "^8.3.4"
+pytest-django = "^4.9.0"
+pytest-mock = "^3.14.0"
+pytest-schema = "^0.1.2"
+pytest-cov = "^6.0.0"
+pytest-factoryboy = "^2.7.0"
+pytest-clarity = "^1.0.1"
+pytest-sugar = "^1.0.0"
+mock = "^5.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+known_first_party = "poetry"
+
+
+[tool.flake8]
+max-line-length = 120
+exclude = [
+    ".git",
+    ".gitignore",
+    "__pycache__",
+    "*.py[co]",
+    "venv",
+    ".pytest_cache",
+    "*/migrations/*",
+    ".env",
+    "conftest.py"
+]
+extend-ignore = [
+    "PT006",
+    "PT004"
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "app.config.settings.tests"
+pythonpath = "."
+mock_use_standalone_module = true
+python_files = [
+    "tests.py",
+    "test.py",
+    "*_tests.py",
+    "test_*.py",
+]
+addopts = [
+    "--color=yes",
+    "--reuse-db",
+    "-s",
+    "-W ignore::DeprecationWarning"
+]
